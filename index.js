@@ -67,7 +67,8 @@ class ChrimsonGreen extends HTMLElement{
 
   setHTMLContent(){
     // Actual default values
-    var md = markdownit({
+    var md = markdownit("default", {
+      html : this.hasAttribute("unsafe"),
       highlight: function (str, lang) {
         if(lang in wccodeSupportedLangs.languages){
           return `<wc-code mode=${lang}><script type="wc-content">${str}</script></wc-code>`;

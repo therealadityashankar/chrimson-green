@@ -7,6 +7,14 @@ backwards compatibility is laggy, is vulnurable to xss attacks (probably, IDK, I
 
 but works in modern browsers
 
+Tags defined:
+
+**chrimson-green**
+
+add this "unsafe" attribute to this tag to allow for inline html i.e.
+
+<chrimson-green unsafe src="..."></chrimson-green>
+
 usage examples:
 
 ```html
