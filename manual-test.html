@@ -7,18 +7,24 @@
     <script src="https://cdn.jsdelivr.net/npm/markdown-it@12.0.2/dist/markdown-it.min.js" charset="utf-8"></script>
     <script type="module" src="./index.js" charset="utf-8"></script>
     <script type="module" src="https://cdn.jsdelivr.net/gh/vanillawc/wc-code@1.0.4/src/wc-code.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+        chrimson-green{
+            display:block;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+            font-family: "Open Sans", sans-serif;
+        }
+    </style>
   </head>
   <body>
-    <chrimson-green><script type=x>
-        # ABC
-        some code lmao
-
-        WAT R U DOING
-
+    <chrimson-green unsafe><script type=x>
+        # Chrimson green test
+        # Header 1
         ## header 2
-
         ### header 3
-
         #### header 4
         
         **bold text lmao**
@@ -26,6 +32,32 @@
         def foo():
             print("hi boya")
         ```
+
+        ```cg-youtube
+        width : 1000
+        height : 500
+        url : https://www.youtube.com/watch?v=9g-6RkMpknQ
+        ```
+
+        ```cg-youtube
+        width : 900
+        height : 500
+        url : https://www.youtube.com/watch?v=9g-6RkMpknQ
+        ```
+
+        ```cg-youtube
+        width : 800
+        height : 500
+        url : https://www.youtube.com/watch?v=9g-6RkMpknQ
+        ```
+
+        ```cg-youtube
+        width : 400
+        height : 200
+        url : https://www.youtube.com/watch?v=9g-6RkMpknQ
+        ```
+
+        <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/yYUVf5ITMik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
         below thing is rendered using `src` attribute
     </script></chrimson-green>

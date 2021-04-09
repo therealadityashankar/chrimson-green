@@ -69,15 +69,41 @@ class ChrimsonGreen extends HTMLElement{
     // Actual default values
     var md = markdownit("default", {
       html : this.hasAttribute("unsafe"),
-      highlight: function (str, lang) {
+      highlight: (str, lang) => {
         if(lang in wccodeSupportedLangs.languages){
-          return `<wc-code mode=${lang}><script type="wc-content">${str}</script></wc-code>`;
+          return `<pre style="white-space:normal;"><wc-code mode=${lang}><script type="wc-content">${str}</script></wc-code></pre>`;
+        } else if (lang == "cg-youtube"){
+            return this.createYouTubeContainer(str)
         }
 
         return "";
       }
     });
     this.innerHTML = md.render(this.contentMD);
+  }
+
+  simpleChrimsonParse(value){
+      value = value.trim()
+      const keyValsArr = value.split("\n").map(value => {
+          const vals = value.split(":")
+          return [vals[0].trim(), vals.slice(1).join("").trim()]
+      })     
+      const keyVal = {}
+
+      for(let [key, val] of keyValsArr){
+          keyVal[key] = val;
+      }
+      console.log(keyVal)
+
+      return keyVal
+  }
+
+  createYouTubeContainer(data){
+      const values = this.simpleChrimsonParse(data)
+      values.width = values.width||"500"
+      values.height = values.height||"400"
+      const v = values.url.split("v=")[1]
+      return `<iframe width="${values.width}" height="${values.height}" src="https://www.youtube-nocookie.com/embed/${v}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
   }
 }
 
