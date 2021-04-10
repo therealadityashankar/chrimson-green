@@ -53,7 +53,7 @@ this takes in 3 yaml-like parameters, url, width [optional, default 500], height
 inside a code block, with language cg-youtube,
 
 ````
-```cd-youtube
+```cg-youtube
 width : 1000
 height : 500
 url : https://www.youtube.com/watch?v=9g-6RkMpknQ
