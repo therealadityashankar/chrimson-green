@@ -15,7 +15,7 @@ add this "unsafe" attribute to this tag to allow for inline html i.e.
 
 usage examples:
 
-```html
+````html
 <chrimson-green><script type=x>
 # Here
 
@@ -25,10 +25,14 @@ is
 
 markdown
 
-you'll have to test how three-backtics and code get changed to interactive
-code yourself, since I'm to lazy to think of markdown wierdyness, or run the manual-test.html file in a webserver
-</script></chrimson-green>
+```python
+def foo():
+    print("hi !")
+
+foo()
 ```
+</script></chrimson-green>
+````
 
 alternatively
 
