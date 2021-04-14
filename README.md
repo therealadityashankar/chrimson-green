@@ -46,7 +46,14 @@ alternatively
 
 a tag to implement youtube videos inside the markdown, this is written the same way programming blocks are written, but with the language set as "cg-youtube"
 
-this takes in 3 yaml-like parameters, url, width [optional, default 500], height [optional, default 400], that allow the embedding of youtube videos in markdown
+this takes in yaml-like parameters, 
+url, 
+width : [optional, default = full width of chrimson green element], 
+height : [optional, default = width / (ratio)]
+ratio : [optional, default = (1.77777)] // specifies the width:height ratio, has to be a decimal, default 1.7777 = 16:9 aspect ratio
+
+if only the width or height are specified, the other will be calculated via the ratio,
+if neither width or height are specified, the width takes up the whole width of the element, and also autoresizes when the width of the element changes
 
 #### Example implementation
 
@@ -54,8 +61,7 @@ inside a code block, with language cg-youtube,
 
 ````
 ```cg-youtube
-width : 1000
-height : 500
+ratio : 2
 url : https://www.youtube.com/watch?v=9g-6RkMpknQ
 ```
 ````

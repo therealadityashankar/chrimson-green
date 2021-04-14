@@ -93,17 +93,45 @@ class ChrimsonGreen extends HTMLElement{
       for(let [key, val] of keyValsArr){
           keyVal[key] = val;
       }
-      console.log(keyVal)
 
       return keyVal
   }
 
   createYouTubeContainer(data){
       const values = this.simpleChrimsonParse(data)
-      values.width = values.width||"500"
-      values.height = values.height||"400"
+
+      let autoresize = false;
+      let randomizedId = ""
+      const chars = "abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+      for(let i=0; i<15; i++){
+          randomizedId += chars[Math.floor(Math.random()*chars.length)]
+      }
+
+      // if height and width are unspecified autoresize is true
+      if(!values.width && !values.height) autoresize = true;
+
+      values.ratio = Number.parseFloat(values.ratio)||(16/9);
+
+      if(values.height && values.ratio && !values.width){
+          values.height = Number.parseFloat(values.height)
+          values.width = values.height*values.ratio;
+      }
+
+      values.width = Number.parseFloat(values.width)||this.getBoundingClientRect().width;
+      values.height = values.height||values.width/values.ratio;
+
+      if(autoresize){
+          window.addEventListener("resize", () => {
+              values.width = this.getBoundingClientRect().width;
+              values.height = values.width/values.ratio;
+              const iframe = document.getElementById(randomizedId);
+              iframe.height = values.height;
+              iframe.width = values.width;
+          })
+      }
       const v = values.url.split("v=")[1]
-      return `<iframe width="${values.width}" height="${values.height}" src="https://www.youtube-nocookie.com/embed/${v}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+      return `<iframe id="${randomizedId}" width="${values.width}" height="${values.height}" src="https://www.youtube-nocookie.com/embed/${v}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
   }
 }
 
