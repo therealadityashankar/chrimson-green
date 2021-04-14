@@ -65,3 +65,5 @@ ratio : 2
 url : https://www.youtube.com/watch?v=9g-6RkMpknQ
 ```
 ````
+
+sometimes the auto-resizing fails (if anyone can help me debug why, I'd be greatful if someone could helpme debug this, but for that usecase there is a function called ChrimsonGreen.forceYoutubeContentResize() that may be called after the dom content is loaded to fix this

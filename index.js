@@ -122,18 +122,28 @@ class ChrimsonGreen extends HTMLElement{
       values.height = values.height||values.width/values.ratio;
 
       if(autoresize){
-          const resizeObserver = new ResizeObserver(() => {
+          const resizeFn = () => {
               values.width = this.getBoundingClientRect().width;
               values.height = values.width/values.ratio;
               const iframe = document.getElementById(randomizedId);
               iframe.height = values.height;
               iframe.width = values.width;
-          })
+          }
 
+          const resizeObserver = new ResizeObserver(resizeFn)
           resizeObserver.observe(this)
+
+          this.addEventListener("forced-resize", resizeFn)
       }
       const v = values.url.split("v=")[1]
       return `<iframe id="${randomizedId}" width="${values.width}" height="${values.height}" src="https://www.youtube-nocookie.com/embed/${v}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+  }
+
+  /**
+   * I found a use case where the ResizeObserver above didn't work, so this is a fallback for that
+   */
+  forceYoutubeContentResize(){
+      this.dispatchEvent(new CustomEvent("forced-resize"))
   }
 }
 
