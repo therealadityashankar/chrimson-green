@@ -122,13 +122,15 @@ class ChrimsonGreen extends HTMLElement{
       values.height = values.height||values.width/values.ratio;
 
       if(autoresize){
-          window.addEventListener("resize", () => {
+          const resizeObserver = new ResizeObserver(() => {
               values.width = this.getBoundingClientRect().width;
               values.height = values.width/values.ratio;
               const iframe = document.getElementById(randomizedId);
               iframe.height = values.height;
               iframe.width = values.width;
           })
+
+          resizeObserver.observe(this)
       }
       const v = values.url.split("v=")[1]
       return `<iframe id="${randomizedId}" width="${values.width}" height="${values.height}" src="https://www.youtube-nocookie.com/embed/${v}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
